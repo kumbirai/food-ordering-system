@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>order-service</module>
+        <module>common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -47,6 +48,11 @@
             <dependency>
                 <groupId>com.kumbirai.udemy</groupId>
                 <artifactId>order-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumbirai.udemy</groupId>
+                <artifactId>common-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
