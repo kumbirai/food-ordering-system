@@ -1,17 +1,19 @@
 package com.kumbirai.udemy.food.ordering.domain.entity;
 
-import com.kumbirai.udemy.food.ordering.common.valueobject.OrderStatus;
-import com.kumbirai.udemy.food.ordering.domain.exception.OrderDomainException;
-import com.kumbirai.udemy.food.ordering.domain.valueobject.OrderItemId;
-import com.kumbirai.udemy.food.ordering.domain.valueobject.StreetAddress;
 import com.kumbirai.udemy.food.ordering.common.entity.AggregateRoot;
 import com.kumbirai.udemy.food.ordering.common.valueobject.CustomerId;
 import com.kumbirai.udemy.food.ordering.common.valueobject.Money;
 import com.kumbirai.udemy.food.ordering.common.valueobject.OrderId;
+import com.kumbirai.udemy.food.ordering.common.valueobject.OrderStatus;
 import com.kumbirai.udemy.food.ordering.common.valueobject.RestaurantId;
+import com.kumbirai.udemy.food.ordering.domain.exception.OrderDomainException;
+import com.kumbirai.udemy.food.ordering.domain.valueobject.OrderItemId;
+import com.kumbirai.udemy.food.ordering.domain.valueobject.StreetAddress;
 import com.kumbirai.udemy.food.ordering.domain.valueobject.TrackingId;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -72,7 +74,7 @@ public class Order extends AggregateRoot<OrderId>
 
 	public void cancel(List<String> failureMessages)
 	{
-		if (orderStatus != OrderStatus.PENDING || orderStatus != OrderStatus.CANCELLING)
+		if (!(orderStatus == OrderStatus.PENDING || orderStatus == OrderStatus.CANCELLING))
 		{
 			throw new OrderDomainException("Order is not in correct state for cancel operation!");
 		}
@@ -82,7 +84,12 @@ public class Order extends AggregateRoot<OrderId>
 
 	private void updateFailureMessages(List<String> failureMessages)
 	{
-		if (this.failureMessages != null && failureMessages != null)
+		if (Objects.isNull(this.failureMessages) && Objects.nonNull(failureMessages))
+		{
+			this.failureMessages = new ArrayList<>();
+		}
+
+		if (Objects.nonNull(failureMessages))
 		{
 			this.failureMessages.addAll(failureMessages.stream()
 					.filter(message -> !message.isEmpty())
@@ -119,7 +126,7 @@ public class Order extends AggregateRoot<OrderId>
 
 		if (!price.equals(orderItemsTotal))
 		{
-			throw new OrderDomainException(String.format("Total price: %.2f is not equal to Order Items total: %.2f",
+			throw new OrderDomainException(String.format("Total price: %s is not equal to Order items total: %s",
 					price.getAmount(),
 					orderItemsTotal.getAmount()));
 		}
@@ -129,7 +136,7 @@ public class Order extends AggregateRoot<OrderId>
 	{
 		if (!orderItem.isPriceValid())
 		{
-			throw new OrderDomainException(String.format("Order item price: %.2f is not valid for product %s",
+			throw new OrderDomainException(String.format("Order item price: %s is not valid for product %s",
 					orderItem.getPrice()
 							.getAmount(),
 					orderItem.getProduct()
