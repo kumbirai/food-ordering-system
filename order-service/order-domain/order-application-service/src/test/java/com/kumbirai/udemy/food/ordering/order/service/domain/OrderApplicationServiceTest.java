@@ -41,6 +41,11 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = OrderTestConfiguration.class)
 public class OrderApplicationServiceTest
 {
+	private final UUID CUSTOMER_ID = UUID.fromString("9250b934-5376-449c-90c5-4737c4fc8d66");
+	private final UUID RESTAURANT_ID = UUID.fromString("7ac9fc26-51ae-4021-a2c4-96f372cdbcc5");
+	private final UUID PRODUCT_ID = UUID.fromString("1de7040f-8f6e-40d1-a3a3-45b23e955206");
+	private final UUID ORDER_ID = UUID.fromString("3a0a1952-3225-468d-9d88-b2bef046da89");
+	private final BigDecimal PRICE = new BigDecimal("200.00");
 	@Autowired
 	private OrderApplicationService orderApplicationService;
 	@Autowired
@@ -51,17 +56,9 @@ public class OrderApplicationServiceTest
 	private CustomerRepository customerRepository;
 	@Autowired
 	private RestaurantRepository restaurantRepository;
-
 	private CreateOrderCommand createOrderCommand;
 	private CreateOrderCommand createOrderCommandWrongPrice;
 	private CreateOrderCommand createOrderCommandWrongProductPrice;
-
-	private final UUID CUSTOMER_ID = UUID.fromString("9250b934-5376-449c-90c5-4737c4fc8d66");
-	private final UUID RESTAURANT_ID = UUID.fromString("7ac9fc26-51ae-4021-a2c4-96f372cdbcc5");
-	private final UUID PRODUCT_ID = UUID.fromString("1de7040f-8f6e-40d1-a3a3-45b23e955206");
-	private final UUID ORDER_ID = UUID.fromString("3a0a1952-3225-468d-9d88-b2bef046da89");
-
-	private final BigDecimal PRICE = new BigDecimal("200.00");
 
 	@BeforeAll
 	void init()

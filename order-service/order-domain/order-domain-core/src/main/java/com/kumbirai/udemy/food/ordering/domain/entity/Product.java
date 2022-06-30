@@ -16,14 +16,15 @@ public class Product extends BaseEntity<ProductId>
 		this.price = price;
 	}
 
-	public Product(ProductId productId) {
+	public Product(ProductId productId)
+	{
 		super.setId(productId);
 	}
 
 	public void updateWithConfirmedNameAndPrice(String name, Money price)
 	{
 		this.name = name;
-		this.price= price;
+		this.price = price;
 	}
 
 	public String getName()

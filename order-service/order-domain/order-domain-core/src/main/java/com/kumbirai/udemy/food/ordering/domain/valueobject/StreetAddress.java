@@ -39,6 +39,15 @@ public class StreetAddress
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return Objects.hash(id,
+				street,
+				postalCode,
+				city);
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o)
@@ -55,14 +64,5 @@ public class StreetAddress
 				that.street) && Objects.equals(postalCode,
 				that.postalCode) && Objects.equals(city,
 				that.city);
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(id,
-				street,
-				postalCode,
-				city);
 	}
 }
