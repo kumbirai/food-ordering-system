@@ -9,7 +9,8 @@ package com.kumbirai.udemy.food.ordering.kafka.order.avro.model;
 public enum RestaurantOrderStatus implements org.apache.avro.generic.GenericEnumSymbol<RestaurantOrderStatus>
 {
 	PAID;
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"RestaurantOrderStatus\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"symbols\":[\"PAID\"]}");
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
+			"{\"type\":\"enum\",\"name\":\"RestaurantOrderStatus\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"symbols\":[\"PAID\"]}");
 
 	public static org.apache.avro.Schema getClassSchema()
 	{

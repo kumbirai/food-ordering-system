@@ -17,22 +17,15 @@ public class KafkaMessageHelper
 			@Override
 			public void onFailure(Throwable ex)
 			{
-				log.error("Error while sending " + avroModelName + " message {} to topic {}",
-						avroModel.toString(),
-						responseTopicName,
-						ex);
+				log.error("Error while sending " + avroModelName + " message {} to topic {}", avroModel.toString(), responseTopicName, ex);
 			}
 
 			@Override
 			public void onSuccess(SendResult<String, T> result)
 			{
 				RecordMetadata metadata = result.getRecordMetadata();
-				log.info("Received successful response from Kafka for order id: {}" + " Topic: {} Partition: {} Offset: {} Timestamp: {}",
-						orderId,
-						metadata.topic(),
-						metadata.partition(),
-						metadata.offset(),
-						metadata.timestamp());
+				log.info("Received successful response from Kafka for order id: {}" + " Topic: {} Partition: {} Offset: {} Timestamp: {}", orderId, metadata.topic(), metadata.partition(),
+						 metadata.offset(), metadata.timestamp());
 			}
 		};
 	}

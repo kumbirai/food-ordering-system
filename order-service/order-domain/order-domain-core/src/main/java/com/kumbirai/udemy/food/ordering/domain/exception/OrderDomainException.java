@@ -11,7 +11,6 @@ public class OrderDomainException extends DomainException
 
 	public OrderDomainException(String message, Throwable cause)
 	{
-		super(message,
-				cause);
+		super(message, cause);
 	}
 }

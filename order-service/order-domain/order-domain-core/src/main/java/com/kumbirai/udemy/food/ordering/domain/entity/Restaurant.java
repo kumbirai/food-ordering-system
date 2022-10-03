@@ -8,7 +8,7 @@ import java.util.List;
 public class Restaurant extends AggregateRoot<RestaurantId>
 {
 	private final List<Product> products;
-	private boolean active;
+	private final boolean active;
 
 	private Restaurant(Builder builder)
 	{

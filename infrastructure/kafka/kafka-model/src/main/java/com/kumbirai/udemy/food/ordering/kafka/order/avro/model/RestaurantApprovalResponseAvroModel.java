@@ -13,25 +13,26 @@ import org.apache.avro.specific.SpecificData;
 @org.apache.avro.specific.AvroGenerated
 public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord
 {
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RestaurantApprovalResponseAvroModel\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"restaurantId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"orderApprovalStatus\",\"type\":{\"type\":\"enum\",\"name\":\"OrderApprovalStatus\",\"symbols\":[\"APPROVED\",\"REJECTED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
+			"{\"type\":\"record\",\"name\":\"RestaurantApprovalResponseAvroModel\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"restaurantId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"orderApprovalStatus\",\"type\":{\"type\":\"enum\",\"name\":\"OrderApprovalStatus\",\"symbols\":[\"APPROVED\",\"REJECTED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
 	private static final long serialVersionUID = -5608099928609589893L;
 	private static final SpecificData MODEL$ = new SpecificData();
-	private static final BinaryMessageEncoder<RestaurantApprovalResponseAvroModel> ENCODER = new BinaryMessageEncoder<RestaurantApprovalResponseAvroModel>(MODEL$,
-			SCHEMA$);
-	private static final BinaryMessageDecoder<RestaurantApprovalResponseAvroModel> DECODER = new BinaryMessageDecoder<RestaurantApprovalResponseAvroModel>(MODEL$,
-			SCHEMA$);
+	private static final BinaryMessageEncoder<RestaurantApprovalResponseAvroModel> ENCODER = new BinaryMessageEncoder<RestaurantApprovalResponseAvroModel>(MODEL$, SCHEMA$);
+	private static final BinaryMessageDecoder<RestaurantApprovalResponseAvroModel> DECODER = new BinaryMessageDecoder<RestaurantApprovalResponseAvroModel>(MODEL$, SCHEMA$);
 	private static final org.apache.avro.Conversion<?>[] conversions = new org.apache.avro.Conversion<?>[] { null,
-			null,
-			null,
-			null,
-			new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-			null,
-			null,
-			null };
+																											 null,
+																											 null,
+																											 null,
+																											 new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+																											 null,
+																											 null,
+																											 null };
 	@SuppressWarnings("unchecked")
-	private static final org.apache.avro.io.DatumWriter<RestaurantApprovalResponseAvroModel> WRITER$ = (org.apache.avro.io.DatumWriter<RestaurantApprovalResponseAvroModel>) MODEL$.createDatumWriter(SCHEMA$);
+	private static final org.apache.avro.io.DatumWriter<RestaurantApprovalResponseAvroModel> WRITER$ = (org.apache.avro.io.DatumWriter<RestaurantApprovalResponseAvroModel>) MODEL$.createDatumWriter(
+			SCHEMA$);
 	@SuppressWarnings("unchecked")
-	private static final org.apache.avro.io.DatumReader<RestaurantApprovalResponseAvroModel> READER$ = (org.apache.avro.io.DatumReader<RestaurantApprovalResponseAvroModel>) MODEL$.createDatumReader(SCHEMA$);
+	private static final org.apache.avro.io.DatumReader<RestaurantApprovalResponseAvroModel> READER$ = (org.apache.avro.io.DatumReader<RestaurantApprovalResponseAvroModel>) MODEL$.createDatumReader(
+			SCHEMA$);
 
 	static
 	{
@@ -45,6 +46,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 	private java.time.Instant createdAt;
 	private com.kumbirai.udemy.food.ordering.kafka.order.avro.model.OrderApprovalStatus orderApprovalStatus;
 	private java.util.List<java.lang.String> failureMessages;
+
 	/**
 	 * Default constructor.  Note that this does not initialize fields
 	 * to their default values from the schema.  If that is desired then
@@ -53,6 +55,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 	public RestaurantApprovalResponseAvroModel()
 	{
 	}
+
 	/**
 	 * All-args constructor.
 	 * @param id The new value for id
@@ -64,7 +67,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 	 * @param failureMessages The new value for failureMessages
 	 */
 	public RestaurantApprovalResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String restaurantId, java.lang.String orderId, java.time.Instant createdAt,
-			com.kumbirai.udemy.food.ordering.kafka.order.avro.model.OrderApprovalStatus orderApprovalStatus, java.util.List<java.lang.String> failureMessages)
+											   com.kumbirai.udemy.food.ordering.kafka.order.avro.model.OrderApprovalStatus orderApprovalStatus, java.util.List<java.lang.String> failureMessages)
 	{
 		this.id = id;
 		this.sagaId = sagaId;
@@ -105,9 +108,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 	 */
 	public static BinaryMessageDecoder<RestaurantApprovalResponseAvroModel> createDecoder(SchemaStore resolver)
 	{
-		return new BinaryMessageDecoder<RestaurantApprovalResponseAvroModel>(MODEL$,
-				SCHEMA$,
-				resolver);
+		return new BinaryMessageDecoder<RestaurantApprovalResponseAvroModel>(MODEL$, SCHEMA$, resolver);
 	}
 
 	/**
@@ -251,15 +252,13 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 	@Override
 	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException
 	{
-		WRITER$.write(this,
-				SpecificData.getEncoder(out));
+		WRITER$.write(this, SpecificData.getEncoder(out));
 	}
 
 	@Override
 	public void readExternal(java.io.ObjectInput in) throws java.io.IOException
 	{
-		READER$.read(this,
-				SpecificData.getDecoder(in));
+		READER$.read(this, SpecificData.getDecoder(in));
 	}
 
 	/**
@@ -407,8 +406,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		/** Creates a new Builder */
 		private Builder()
 		{
-			super(SCHEMA$,
-					MODEL$);
+			super(SCHEMA$, MODEL$);
 		}
 
 		/**
@@ -418,53 +416,39 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		private Builder(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder other)
 		{
 			super(other);
-			if (isValidValue(fields()[0],
-					other.id))
+			if (isValidValue(fields()[0], other.id))
 			{
-				this.id = data().deepCopy(fields()[0].schema(),
-						other.id);
+				this.id = data().deepCopy(fields()[0].schema(), other.id);
 				fieldSetFlags()[0] = other.fieldSetFlags()[0];
 			}
-			if (isValidValue(fields()[1],
-					other.sagaId))
+			if (isValidValue(fields()[1], other.sagaId))
 			{
-				this.sagaId = data().deepCopy(fields()[1].schema(),
-						other.sagaId);
+				this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
 				fieldSetFlags()[1] = other.fieldSetFlags()[1];
 			}
-			if (isValidValue(fields()[2],
-					other.restaurantId))
+			if (isValidValue(fields()[2], other.restaurantId))
 			{
-				this.restaurantId = data().deepCopy(fields()[2].schema(),
-						other.restaurantId);
+				this.restaurantId = data().deepCopy(fields()[2].schema(), other.restaurantId);
 				fieldSetFlags()[2] = other.fieldSetFlags()[2];
 			}
-			if (isValidValue(fields()[3],
-					other.orderId))
+			if (isValidValue(fields()[3], other.orderId))
 			{
-				this.orderId = data().deepCopy(fields()[3].schema(),
-						other.orderId);
+				this.orderId = data().deepCopy(fields()[3].schema(), other.orderId);
 				fieldSetFlags()[3] = other.fieldSetFlags()[3];
 			}
-			if (isValidValue(fields()[4],
-					other.createdAt))
+			if (isValidValue(fields()[4], other.createdAt))
 			{
-				this.createdAt = data().deepCopy(fields()[4].schema(),
-						other.createdAt);
+				this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
 				fieldSetFlags()[4] = other.fieldSetFlags()[4];
 			}
-			if (isValidValue(fields()[5],
-					other.orderApprovalStatus))
+			if (isValidValue(fields()[5], other.orderApprovalStatus))
 			{
-				this.orderApprovalStatus = data().deepCopy(fields()[5].schema(),
-						other.orderApprovalStatus);
+				this.orderApprovalStatus = data().deepCopy(fields()[5].schema(), other.orderApprovalStatus);
 				fieldSetFlags()[5] = other.fieldSetFlags()[5];
 			}
-			if (isValidValue(fields()[6],
-					other.failureMessages))
+			if (isValidValue(fields()[6], other.failureMessages))
 			{
-				this.failureMessages = data().deepCopy(fields()[6].schema(),
-						other.failureMessages);
+				this.failureMessages = data().deepCopy(fields()[6].schema(), other.failureMessages);
 				fieldSetFlags()[6] = other.fieldSetFlags()[6];
 			}
 		}
@@ -475,55 +459,40 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		private Builder(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel other)
 		{
-			super(SCHEMA$,
-					MODEL$);
-			if (isValidValue(fields()[0],
-					other.id))
+			super(SCHEMA$, MODEL$);
+			if (isValidValue(fields()[0], other.id))
 			{
-				this.id = data().deepCopy(fields()[0].schema(),
-						other.id);
+				this.id = data().deepCopy(fields()[0].schema(), other.id);
 				fieldSetFlags()[0] = true;
 			}
-			if (isValidValue(fields()[1],
-					other.sagaId))
+			if (isValidValue(fields()[1], other.sagaId))
 			{
-				this.sagaId = data().deepCopy(fields()[1].schema(),
-						other.sagaId);
+				this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
 				fieldSetFlags()[1] = true;
 			}
-			if (isValidValue(fields()[2],
-					other.restaurantId))
+			if (isValidValue(fields()[2], other.restaurantId))
 			{
-				this.restaurantId = data().deepCopy(fields()[2].schema(),
-						other.restaurantId);
+				this.restaurantId = data().deepCopy(fields()[2].schema(), other.restaurantId);
 				fieldSetFlags()[2] = true;
 			}
-			if (isValidValue(fields()[3],
-					other.orderId))
+			if (isValidValue(fields()[3], other.orderId))
 			{
-				this.orderId = data().deepCopy(fields()[3].schema(),
-						other.orderId);
+				this.orderId = data().deepCopy(fields()[3].schema(), other.orderId);
 				fieldSetFlags()[3] = true;
 			}
-			if (isValidValue(fields()[4],
-					other.createdAt))
+			if (isValidValue(fields()[4], other.createdAt))
 			{
-				this.createdAt = data().deepCopy(fields()[4].schema(),
-						other.createdAt);
+				this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
 				fieldSetFlags()[4] = true;
 			}
-			if (isValidValue(fields()[5],
-					other.orderApprovalStatus))
+			if (isValidValue(fields()[5], other.orderApprovalStatus))
 			{
-				this.orderApprovalStatus = data().deepCopy(fields()[5].schema(),
-						other.orderApprovalStatus);
+				this.orderApprovalStatus = data().deepCopy(fields()[5].schema(), other.orderApprovalStatus);
 				fieldSetFlags()[5] = true;
 			}
-			if (isValidValue(fields()[6],
-					other.failureMessages))
+			if (isValidValue(fields()[6], other.failureMessages))
 			{
-				this.failureMessages = data().deepCopy(fields()[6].schema(),
-						other.failureMessages);
+				this.failureMessages = data().deepCopy(fields()[6].schema(), other.failureMessages);
 				fieldSetFlags()[6] = true;
 			}
 		}
@@ -544,8 +513,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setId(java.lang.String value)
 		{
-			validate(fields()[0],
-					value);
+			validate(fields()[0], value);
 			this.id = value;
 			fieldSetFlags()[0] = true;
 			return this;
@@ -587,8 +555,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setSagaId(java.lang.String value)
 		{
-			validate(fields()[1],
-					value);
+			validate(fields()[1], value);
 			this.sagaId = value;
 			fieldSetFlags()[1] = true;
 			return this;
@@ -630,8 +597,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setRestaurantId(java.lang.String value)
 		{
-			validate(fields()[2],
-					value);
+			validate(fields()[2], value);
 			this.restaurantId = value;
 			fieldSetFlags()[2] = true;
 			return this;
@@ -673,8 +639,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setOrderId(java.lang.String value)
 		{
-			validate(fields()[3],
-					value);
+			validate(fields()[3], value);
 			this.orderId = value;
 			fieldSetFlags()[3] = true;
 			return this;
@@ -716,8 +681,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setCreatedAt(java.time.Instant value)
 		{
-			validate(fields()[4],
-					value);
+			validate(fields()[4], value);
 			this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
 			fieldSetFlags()[4] = true;
 			return this;
@@ -759,8 +723,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setOrderApprovalStatus(
 				com.kumbirai.udemy.food.ordering.kafka.order.avro.model.OrderApprovalStatus value)
 		{
-			validate(fields()[5],
-					value);
+			validate(fields()[5], value);
 			this.orderApprovalStatus = value;
 			fieldSetFlags()[5] = true;
 			return this;
@@ -802,8 +765,7 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value)
 		{
-			validate(fields()[6],
-					value);
+			validate(fields()[6], value);
 			this.failureMessages = value;
 			fieldSetFlags()[6] = true;
 			return this;

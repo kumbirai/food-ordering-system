@@ -11,8 +11,7 @@ public class OrderCancelledEvent extends OrderEvent
 
 	public OrderCancelledEvent(Order order, ZonedDateTime createdAt, DomainEventPublisher<OrderCancelledEvent> orderCancelledEventDomainEventPublisher)
 	{
-		super(order,
-				createdAt);
+		super(order, createdAt);
 		this.orderCancelledEventDomainEventPublisher = orderCancelledEventDomainEventPublisher;
 	}
 

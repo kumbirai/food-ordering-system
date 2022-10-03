@@ -31,7 +31,7 @@ public class OrderCreateHelper
 	private final OrderCreatedPaymentRequestMessagePublisher orderCreatedEventDomainEventPublisher;
 
 	public OrderCreateHelper(OrderDomainService orderDomainService, OrderRepository orderRepository, CustomerRepository customerRepository, RestaurantRepository restaurantRepository,
-			OrderDataMapper orderDataMapper, OrderCreatedPaymentRequestMessagePublisher orderCreatedEventDomainEventPublisher)
+							 OrderDataMapper orderDataMapper, OrderCreatedPaymentRequestMessagePublisher orderCreatedEventDomainEventPublisher)
 	{
 		this.orderDomainService = orderDomainService;
 		this.orderRepository = orderRepository;
@@ -47,14 +47,11 @@ public class OrderCreateHelper
 		checkCustomer(createOrderCommand.getCustomerId());
 		Restaurant restaurant = checkRestaurant(createOrderCommand);
 		Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
-		OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order,
-				restaurant,
-				orderCreatedEventDomainEventPublisher);
+		OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant, orderCreatedEventDomainEventPublisher);
 		saveOrder(order);
-		log.info("Order is created with id: {}",
-				orderCreatedEvent.getOrder()
-						.getId()
-						.getValue());
+		log.info("Order is created with id: {}", orderCreatedEvent.getOrder()
+				.getId()
+				.getValue());
 		return orderCreatedEvent;
 	}
 
@@ -64,8 +61,7 @@ public class OrderCreateHelper
 		Optional<Restaurant> optionalRestaurant = restaurantRepository.findRestaurantInformation(restaurant);
 		if (optionalRestaurant.isEmpty())
 		{
-			log.warn("Could not find restaurant with restaurant id: {}",
-					createOrderCommand.getRestaurantId());
+			log.warn("Could not find restaurant with restaurant id: {}", createOrderCommand.getRestaurantId());
 			throw new OrderDomainException("Could not find restaurant with restaurant id: " + createOrderCommand.getRestaurantId());
 		}
 		return optionalRestaurant.get();
@@ -76,8 +72,7 @@ public class OrderCreateHelper
 		Optional<Customer> customer = customerRepository.findCustomer(customerId);
 		if (customer.isEmpty())
 		{
-			log.warn("Could not find customer with customer id: {}",
-					customerId);
+			log.warn("Could not find customer with customer id: {}", customerId);
 			throw new OrderDomainException("Could not find customer with customer id: " + customer);
 		}
 	}
@@ -90,9 +85,8 @@ public class OrderCreateHelper
 			log.error("Could not save order!");
 			throw new OrderDomainException("Could not save order!");
 		}
-		log.info("Order is saved with id: {}",
-				orderResult.getId()
-						.getValue());
+		log.info("Order is saved with id: {}", orderResult.getId()
+				.getValue());
 		return orderResult;
 	}
 }

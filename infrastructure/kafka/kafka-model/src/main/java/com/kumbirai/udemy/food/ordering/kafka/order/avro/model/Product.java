@@ -13,13 +13,12 @@ import org.apache.avro.specific.SpecificData;
 @org.apache.avro.specific.AvroGenerated
 public class Product extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord
 {
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Product\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"uuid\"},{\"name\":\"quantity\",\"type\":\"int\"}]}");
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
+			"{\"type\":\"record\",\"name\":\"Product\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"uuid\"},{\"name\":\"quantity\",\"type\":\"int\"}]}");
 	private static final long serialVersionUID = -1893662786505932460L;
 	private static final SpecificData MODEL$ = new SpecificData();
-	private static final BinaryMessageEncoder<Product> ENCODER = new BinaryMessageEncoder<Product>(MODEL$,
-			SCHEMA$);
-	private static final BinaryMessageDecoder<Product> DECODER = new BinaryMessageDecoder<Product>(MODEL$,
-			SCHEMA$);
+	private static final BinaryMessageEncoder<Product> ENCODER = new BinaryMessageEncoder<Product>(MODEL$, SCHEMA$);
+	private static final BinaryMessageDecoder<Product> DECODER = new BinaryMessageDecoder<Product>(MODEL$, SCHEMA$);
 	@SuppressWarnings("unchecked")
 	private static final org.apache.avro.io.DatumWriter<Product> WRITER$ = (org.apache.avro.io.DatumWriter<Product>) MODEL$.createDatumWriter(SCHEMA$);
 	@SuppressWarnings("unchecked")
@@ -77,9 +76,7 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 	 */
 	public static BinaryMessageDecoder<Product> createDecoder(SchemaStore resolver)
 	{
-		return new BinaryMessageDecoder<Product>(MODEL$,
-				SCHEMA$,
-				resolver);
+		return new BinaryMessageDecoder<Product>(MODEL$, SCHEMA$, resolver);
 	}
 
 	/**
@@ -190,15 +187,13 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 	@Override
 	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException
 	{
-		WRITER$.write(this,
-				SpecificData.getEncoder(out));
+		WRITER$.write(this, SpecificData.getEncoder(out));
 	}
 
 	@Override
 	public void readExternal(java.io.ObjectInput in) throws java.io.IOException
 	{
-		READER$.read(this,
-				SpecificData.getDecoder(in));
+		READER$.read(this, SpecificData.getDecoder(in));
 	}
 
 	@Override
@@ -297,8 +292,7 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 		/** Creates a new Builder */
 		private Builder()
 		{
-			super(SCHEMA$,
-					MODEL$);
+			super(SCHEMA$, MODEL$);
 		}
 
 		/**
@@ -308,18 +302,14 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 		private Builder(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.Product.Builder other)
 		{
 			super(other);
-			if (isValidValue(fields()[0],
-					other.id))
+			if (isValidValue(fields()[0], other.id))
 			{
-				this.id = data().deepCopy(fields()[0].schema(),
-						other.id);
+				this.id = data().deepCopy(fields()[0].schema(), other.id);
 				fieldSetFlags()[0] = other.fieldSetFlags()[0];
 			}
-			if (isValidValue(fields()[1],
-					other.quantity))
+			if (isValidValue(fields()[1], other.quantity))
 			{
-				this.quantity = data().deepCopy(fields()[1].schema(),
-						other.quantity);
+				this.quantity = data().deepCopy(fields()[1].schema(), other.quantity);
 				fieldSetFlags()[1] = other.fieldSetFlags()[1];
 			}
 		}
@@ -330,20 +320,15 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 		 */
 		private Builder(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.Product other)
 		{
-			super(SCHEMA$,
-					MODEL$);
-			if (isValidValue(fields()[0],
-					other.id))
+			super(SCHEMA$, MODEL$);
+			if (isValidValue(fields()[0], other.id))
 			{
-				this.id = data().deepCopy(fields()[0].schema(),
-						other.id);
+				this.id = data().deepCopy(fields()[0].schema(), other.id);
 				fieldSetFlags()[0] = true;
 			}
-			if (isValidValue(fields()[1],
-					other.quantity))
+			if (isValidValue(fields()[1], other.quantity))
 			{
-				this.quantity = data().deepCopy(fields()[1].schema(),
-						other.quantity);
+				this.quantity = data().deepCopy(fields()[1].schema(), other.quantity);
 				fieldSetFlags()[1] = true;
 			}
 		}
@@ -364,8 +349,7 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.Product.Builder setId(java.lang.String value)
 		{
-			validate(fields()[0],
-					value);
+			validate(fields()[0], value);
 			this.id = value;
 			fieldSetFlags()[0] = true;
 			return this;
@@ -407,8 +391,7 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.Product.Builder setQuantity(int value)
 		{
-			validate(fields()[1],
-					value);
+			validate(fields()[1], value);
 			this.quantity = value;
 			fieldSetFlags()[1] = true;
 			return this;

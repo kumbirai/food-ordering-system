@@ -33,8 +33,7 @@ public class MoneyTest
 		Money zero = new Money(new BigDecimal(0));
 		Money one = new Money(new BigDecimal(1));
 		Money result = zero.add(one);
-		assertEquals(new BigDecimal("1.00"),
-				result.getAmount());
+		assertEquals(new BigDecimal("1.00"), result.getAmount());
 	}
 
 	@Test
@@ -42,8 +41,7 @@ public class MoneyTest
 	{
 		Money one = new Money(new BigDecimal(1));
 		Money result = one.subtract(one);
-		assertEquals(new BigDecimal("0.00"),
-				result.getAmount());
+		assertEquals(new BigDecimal("0.00"), result.getAmount());
 	}
 
 	@Test
@@ -52,10 +50,8 @@ public class MoneyTest
 		Money zero = new Money(new BigDecimal(0));
 		Money one = new Money(new BigDecimal(1));
 		Money result = zero.multiply(7);
-		assertEquals(new BigDecimal("0.00"),
-				result.getAmount());
+		assertEquals(new BigDecimal("0.00"), result.getAmount());
 		result = one.multiply(7);
-		assertEquals(new BigDecimal("7.00"),
-				result.getAmount());
+		assertEquals(new BigDecimal("7.00"), result.getAmount());
 	}
 }

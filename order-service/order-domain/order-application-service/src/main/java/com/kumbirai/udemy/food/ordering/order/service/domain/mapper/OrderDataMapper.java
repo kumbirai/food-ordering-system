@@ -27,9 +27,9 @@ public class OrderDataMapper
 		return Restaurant.builder()
 				.restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
 				.products(createOrderCommand.getItems()
-						.stream()
-						.map(orderItem -> new Product(new ProductId(orderItem.getProductId())))
-						.collect(Collectors.toList()))
+								  .stream()
+								  .map(orderItem -> new Product(new ProductId(orderItem.getProductId())))
+								  .collect(Collectors.toList()))
 				.build();
 	}
 
@@ -48,7 +48,7 @@ public class OrderDataMapper
 	{
 		return CreateOrderResponse.builder()
 				.orderTrackingId(order.getTrackingId()
-						.getValue())
+										 .getValue())
 				.orderStatus(order.getOrderStatus())
 				.message(message)
 				.build();
@@ -58,7 +58,7 @@ public class OrderDataMapper
 	{
 		return TrackOrderResponse.builder()
 				.orderTrackingId(order.getTrackingId()
-						.getValue())
+										 .getValue())
 				.orderStatus(order.getOrderStatus())
 				.failureMessages(order.getFailureMessages())
 				.build();
@@ -78,9 +78,6 @@ public class OrderDataMapper
 
 	private StreetAddress orderAddressToStreetAddress(OrderAddress orderAddress)
 	{
-		return new StreetAddress(UUID.randomUUID(),
-				orderAddress.getStreet(),
-				orderAddress.getPostalCode(),
-				orderAddress.getCity());
+		return new StreetAddress(UUID.randomUUID(), orderAddress.getStreet(), orderAddress.getPostalCode(), orderAddress.getCity());
 	}
 }

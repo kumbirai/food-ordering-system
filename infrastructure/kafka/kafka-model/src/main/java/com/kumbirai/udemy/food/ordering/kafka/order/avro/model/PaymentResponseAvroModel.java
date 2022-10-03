@@ -13,23 +13,22 @@ import org.apache.avro.specific.SpecificData;
 @org.apache.avro.specific.AvroGenerated
 public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord
 {
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentResponseAvroModel\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"price\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"paymentStatus\",\"type\":{\"type\":\"enum\",\"name\":\"PaymentStatus\",\"symbols\":[\"COMPLETED\",\"CANCELLED\",\"FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
+			"{\"type\":\"record\",\"name\":\"PaymentResponseAvroModel\",\"namespace\":\"com.kumbirai.udemy.food.ordering.kafka.order.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"price\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"paymentStatus\",\"type\":{\"type\":\"enum\",\"name\":\"PaymentStatus\",\"symbols\":[\"COMPLETED\",\"CANCELLED\",\"FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
 	private static final long serialVersionUID = 1278586298315383150L;
 	private static final SpecificData MODEL$ = new SpecificData();
-	private static final BinaryMessageEncoder<PaymentResponseAvroModel> ENCODER = new BinaryMessageEncoder<PaymentResponseAvroModel>(MODEL$,
-			SCHEMA$);
-	private static final BinaryMessageDecoder<PaymentResponseAvroModel> DECODER = new BinaryMessageDecoder<PaymentResponseAvroModel>(MODEL$,
-			SCHEMA$);
+	private static final BinaryMessageEncoder<PaymentResponseAvroModel> ENCODER = new BinaryMessageEncoder<PaymentResponseAvroModel>(MODEL$, SCHEMA$);
+	private static final BinaryMessageDecoder<PaymentResponseAvroModel> DECODER = new BinaryMessageDecoder<PaymentResponseAvroModel>(MODEL$, SCHEMA$);
 	private static final org.apache.avro.Conversion<?>[] conversions = new org.apache.avro.Conversion<?>[] { null,
-			null,
-			null,
-			null,
-			null,
-			new org.apache.avro.Conversions.DecimalConversion(),
-			new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-			null,
-			null,
-			null };
+																											 null,
+																											 null,
+																											 null,
+																											 null,
+																											 new org.apache.avro.Conversions.DecimalConversion(),
+																											 new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+																											 null,
+																											 null,
+																											 null };
 	@SuppressWarnings("unchecked")
 	private static final org.apache.avro.io.DatumWriter<PaymentResponseAvroModel> WRITER$ = (org.apache.avro.io.DatumWriter<PaymentResponseAvroModel>) MODEL$.createDatumWriter(SCHEMA$);
 	@SuppressWarnings("unchecked")
@@ -50,6 +49,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 	private java.time.Instant createdAt;
 	private com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentStatus paymentStatus;
 	private java.util.List<java.lang.String> failureMessages;
+
 	/**
 	 * Default constructor.  Note that this does not initialize fields
 	 * to their default values from the schema.  If that is desired then
@@ -58,6 +58,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 	public PaymentResponseAvroModel()
 	{
 	}
+
 	/**
 	 * All-args constructor.
 	 * @param id The new value for id
@@ -71,7 +72,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 	 * @param failureMessages The new value for failureMessages
 	 */
 	public PaymentResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String paymentId, java.lang.String customerId, java.lang.String orderId, java.math.BigDecimal price,
-			java.time.Instant createdAt, com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentStatus paymentStatus, java.util.List<java.lang.String> failureMessages)
+									java.time.Instant createdAt, com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentStatus paymentStatus, java.util.List<java.lang.String> failureMessages)
 	{
 		this.id = id;
 		this.sagaId = sagaId;
@@ -114,9 +115,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 	 */
 	public static BinaryMessageDecoder<PaymentResponseAvroModel> createDecoder(SchemaStore resolver)
 	{
-		return new BinaryMessageDecoder<PaymentResponseAvroModel>(MODEL$,
-				SCHEMA$,
-				resolver);
+		return new BinaryMessageDecoder<PaymentResponseAvroModel>(MODEL$, SCHEMA$, resolver);
 	}
 
 	/**
@@ -270,15 +269,13 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 	@Override
 	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException
 	{
-		WRITER$.write(this,
-				SpecificData.getEncoder(out));
+		WRITER$.write(this, SpecificData.getEncoder(out));
 	}
 
 	@Override
 	public void readExternal(java.io.ObjectInput in) throws java.io.IOException
 	{
-		READER$.read(this,
-				SpecificData.getDecoder(in));
+		READER$.read(this, SpecificData.getDecoder(in));
 	}
 
 	/**
@@ -463,8 +460,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		/** Creates a new Builder */
 		private Builder()
 		{
-			super(SCHEMA$,
-					MODEL$);
+			super(SCHEMA$, MODEL$);
 		}
 
 		/**
@@ -474,67 +470,49 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		private Builder(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder other)
 		{
 			super(other);
-			if (isValidValue(fields()[0],
-					other.id))
+			if (isValidValue(fields()[0], other.id))
 			{
-				this.id = data().deepCopy(fields()[0].schema(),
-						other.id);
+				this.id = data().deepCopy(fields()[0].schema(), other.id);
 				fieldSetFlags()[0] = other.fieldSetFlags()[0];
 			}
-			if (isValidValue(fields()[1],
-					other.sagaId))
+			if (isValidValue(fields()[1], other.sagaId))
 			{
-				this.sagaId = data().deepCopy(fields()[1].schema(),
-						other.sagaId);
+				this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
 				fieldSetFlags()[1] = other.fieldSetFlags()[1];
 			}
-			if (isValidValue(fields()[2],
-					other.paymentId))
+			if (isValidValue(fields()[2], other.paymentId))
 			{
-				this.paymentId = data().deepCopy(fields()[2].schema(),
-						other.paymentId);
+				this.paymentId = data().deepCopy(fields()[2].schema(), other.paymentId);
 				fieldSetFlags()[2] = other.fieldSetFlags()[2];
 			}
-			if (isValidValue(fields()[3],
-					other.customerId))
+			if (isValidValue(fields()[3], other.customerId))
 			{
-				this.customerId = data().deepCopy(fields()[3].schema(),
-						other.customerId);
+				this.customerId = data().deepCopy(fields()[3].schema(), other.customerId);
 				fieldSetFlags()[3] = other.fieldSetFlags()[3];
 			}
-			if (isValidValue(fields()[4],
-					other.orderId))
+			if (isValidValue(fields()[4], other.orderId))
 			{
-				this.orderId = data().deepCopy(fields()[4].schema(),
-						other.orderId);
+				this.orderId = data().deepCopy(fields()[4].schema(), other.orderId);
 				fieldSetFlags()[4] = other.fieldSetFlags()[4];
 			}
-			if (isValidValue(fields()[5],
-					other.price))
+			if (isValidValue(fields()[5], other.price))
 			{
-				this.price = data().deepCopy(fields()[5].schema(),
-						other.price);
+				this.price = data().deepCopy(fields()[5].schema(), other.price);
 				fieldSetFlags()[5] = other.fieldSetFlags()[5];
 			}
-			if (isValidValue(fields()[6],
-					other.createdAt))
+			if (isValidValue(fields()[6], other.createdAt))
 			{
-				this.createdAt = data().deepCopy(fields()[6].schema(),
-						other.createdAt);
+				this.createdAt = data().deepCopy(fields()[6].schema(), other.createdAt);
 				fieldSetFlags()[6] = other.fieldSetFlags()[6];
 			}
-			if (isValidValue(fields()[7],
-					other.paymentStatus))
+			if (isValidValue(fields()[7], other.paymentStatus))
 			{
-				this.paymentStatus = data().deepCopy(fields()[7].schema(),
-						other.paymentStatus);
+				this.paymentStatus = data().deepCopy(fields()[7].schema(), other.paymentStatus);
 				fieldSetFlags()[7] = other.fieldSetFlags()[7];
 			}
-			if (isValidValue(fields()[8],
-					other.failureMessages))
+			if (isValidValue(fields()[8], other.failureMessages))
 			{
-				this.failureMessages = data().deepCopy(fields()[8].schema(),
-						other.failureMessages);
+				this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
 				fieldSetFlags()[8] = other.fieldSetFlags()[8];
 			}
 		}
@@ -545,69 +523,50 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		private Builder(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel other)
 		{
-			super(SCHEMA$,
-					MODEL$);
-			if (isValidValue(fields()[0],
-					other.id))
+			super(SCHEMA$, MODEL$);
+			if (isValidValue(fields()[0], other.id))
 			{
-				this.id = data().deepCopy(fields()[0].schema(),
-						other.id);
+				this.id = data().deepCopy(fields()[0].schema(), other.id);
 				fieldSetFlags()[0] = true;
 			}
-			if (isValidValue(fields()[1],
-					other.sagaId))
+			if (isValidValue(fields()[1], other.sagaId))
 			{
-				this.sagaId = data().deepCopy(fields()[1].schema(),
-						other.sagaId);
+				this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
 				fieldSetFlags()[1] = true;
 			}
-			if (isValidValue(fields()[2],
-					other.paymentId))
+			if (isValidValue(fields()[2], other.paymentId))
 			{
-				this.paymentId = data().deepCopy(fields()[2].schema(),
-						other.paymentId);
+				this.paymentId = data().deepCopy(fields()[2].schema(), other.paymentId);
 				fieldSetFlags()[2] = true;
 			}
-			if (isValidValue(fields()[3],
-					other.customerId))
+			if (isValidValue(fields()[3], other.customerId))
 			{
-				this.customerId = data().deepCopy(fields()[3].schema(),
-						other.customerId);
+				this.customerId = data().deepCopy(fields()[3].schema(), other.customerId);
 				fieldSetFlags()[3] = true;
 			}
-			if (isValidValue(fields()[4],
-					other.orderId))
+			if (isValidValue(fields()[4], other.orderId))
 			{
-				this.orderId = data().deepCopy(fields()[4].schema(),
-						other.orderId);
+				this.orderId = data().deepCopy(fields()[4].schema(), other.orderId);
 				fieldSetFlags()[4] = true;
 			}
-			if (isValidValue(fields()[5],
-					other.price))
+			if (isValidValue(fields()[5], other.price))
 			{
-				this.price = data().deepCopy(fields()[5].schema(),
-						other.price);
+				this.price = data().deepCopy(fields()[5].schema(), other.price);
 				fieldSetFlags()[5] = true;
 			}
-			if (isValidValue(fields()[6],
-					other.createdAt))
+			if (isValidValue(fields()[6], other.createdAt))
 			{
-				this.createdAt = data().deepCopy(fields()[6].schema(),
-						other.createdAt);
+				this.createdAt = data().deepCopy(fields()[6].schema(), other.createdAt);
 				fieldSetFlags()[6] = true;
 			}
-			if (isValidValue(fields()[7],
-					other.paymentStatus))
+			if (isValidValue(fields()[7], other.paymentStatus))
 			{
-				this.paymentStatus = data().deepCopy(fields()[7].schema(),
-						other.paymentStatus);
+				this.paymentStatus = data().deepCopy(fields()[7].schema(), other.paymentStatus);
 				fieldSetFlags()[7] = true;
 			}
-			if (isValidValue(fields()[8],
-					other.failureMessages))
+			if (isValidValue(fields()[8], other.failureMessages))
 			{
-				this.failureMessages = data().deepCopy(fields()[8].schema(),
-						other.failureMessages);
+				this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
 				fieldSetFlags()[8] = true;
 			}
 		}
@@ -628,8 +587,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setId(java.lang.String value)
 		{
-			validate(fields()[0],
-					value);
+			validate(fields()[0], value);
 			this.id = value;
 			fieldSetFlags()[0] = true;
 			return this;
@@ -671,8 +629,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setSagaId(java.lang.String value)
 		{
-			validate(fields()[1],
-					value);
+			validate(fields()[1], value);
 			this.sagaId = value;
 			fieldSetFlags()[1] = true;
 			return this;
@@ -714,8 +671,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setPaymentId(java.lang.String value)
 		{
-			validate(fields()[2],
-					value);
+			validate(fields()[2], value);
 			this.paymentId = value;
 			fieldSetFlags()[2] = true;
 			return this;
@@ -757,8 +713,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setCustomerId(java.lang.String value)
 		{
-			validate(fields()[3],
-					value);
+			validate(fields()[3], value);
 			this.customerId = value;
 			fieldSetFlags()[3] = true;
 			return this;
@@ -800,8 +755,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setOrderId(java.lang.String value)
 		{
-			validate(fields()[4],
-					value);
+			validate(fields()[4], value);
 			this.orderId = value;
 			fieldSetFlags()[4] = true;
 			return this;
@@ -843,8 +797,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setPrice(java.math.BigDecimal value)
 		{
-			validate(fields()[5],
-					value);
+			validate(fields()[5], value);
 			this.price = value;
 			fieldSetFlags()[5] = true;
 			return this;
@@ -886,8 +839,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setCreatedAt(java.time.Instant value)
 		{
-			validate(fields()[6],
-					value);
+			validate(fields()[6], value);
 			this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
 			fieldSetFlags()[6] = true;
 			return this;
@@ -928,8 +880,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setPaymentStatus(com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentStatus value)
 		{
-			validate(fields()[7],
-					value);
+			validate(fields()[7], value);
 			this.paymentStatus = value;
 			fieldSetFlags()[7] = true;
 			return this;
@@ -971,8 +922,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
 		 */
 		public com.kumbirai.udemy.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value)
 		{
-			validate(fields()[8],
-					value);
+			validate(fields()[8], value);
 			this.failureMessages = value;
 			fieldSetFlags()[8] = true;
 			return this;

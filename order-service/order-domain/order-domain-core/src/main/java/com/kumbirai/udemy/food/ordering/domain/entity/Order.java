@@ -110,8 +110,8 @@ public class Order extends AggregateRoot<OrderId>
 		if (Objects.nonNull(failureMessages))
 		{
 			this.failureMessages.addAll(failureMessages.stream()
-					.filter(message -> !message.isEmpty())
-					.collect(Collectors.toList()));
+												.filter(message -> !message.isEmpty())
+												.collect(Collectors.toList()));
 		}
 	}
 
@@ -135,18 +135,15 @@ public class Order extends AggregateRoot<OrderId>
 	{
 		Money orderItemsTotal = items.stream()
 				.map(orderItem ->
-				{
-					validateItemPrice(orderItem);
-					return orderItem.getSubTotal();
-				})
-				.reduce(Money.ZERO,
-						Money::add);
+					 {
+						 validateItemPrice(orderItem);
+						 return orderItem.getSubTotal();
+					 })
+				.reduce(Money.ZERO, Money::add);
 
 		if (!price.equals(orderItemsTotal))
 		{
-			throw new OrderDomainException(String.format("Total price: %s is not equal to Order items total: %s",
-					price.getAmount(),
-					orderItemsTotal.getAmount()));
+			throw new OrderDomainException(String.format("Total price: %s is not equal to Order items total: %s", price.getAmount(), orderItemsTotal.getAmount()));
 		}
 	}
 
@@ -154,12 +151,10 @@ public class Order extends AggregateRoot<OrderId>
 	{
 		if (!orderItem.isPriceValid())
 		{
-			throw new OrderDomainException(String.format("Order item price: %s is not valid for product %s",
-					orderItem.getPrice()
-							.getAmount(),
-					orderItem.getProduct()
-							.getId()
-							.getValue()));
+			throw new OrderDomainException(String.format("Order item price: %s is not valid for product %s", orderItem.getPrice()
+					.getAmount(), orderItem.getProduct()
+																 .getId()
+																 .getValue()));
 		}
 	}
 
@@ -168,8 +163,7 @@ public class Order extends AggregateRoot<OrderId>
 		long itemId = 1;
 		for (OrderItem orderItem : items)
 		{
-			orderItem.initializeOrderItem(this.getId(),
-					new OrderItemId(itemId++));
+			orderItem.initializeOrderItem(this.getId(), new OrderItemId(itemId++));
 		}
 	}
 
