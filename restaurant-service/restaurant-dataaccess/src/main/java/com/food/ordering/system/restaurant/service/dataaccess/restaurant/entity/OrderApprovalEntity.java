@@ -1,9 +1,18 @@
 package com.food.ordering.system.restaurant.service.dataaccess.restaurant.entity;
 
 import com.food.ordering.system.domain.valueobject.OrderApprovalStatus;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
@@ -12,9 +21,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "order_approval",
-        schema = "restaurant")
+       schema = "restaurant")
 @Entity
-public class OrderApprovalEntity {
+public class OrderApprovalEntity implements Serializable
+{
     @Id
     private UUID id;
     private UUID restaurantId;

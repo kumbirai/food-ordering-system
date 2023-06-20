@@ -7,7 +7,8 @@ import com.food.ordering.system.payment.service.domain.event.PaymentEvent;
 
 import java.util.List;
 
-public interface PaymentDomainService {
+public interface PaymentDomainService
+{
     PaymentEvent validateAndInitiatePayment(Payment payment,
                                             CreditEntry creditEntry,
                                             List<CreditHistory> creditHistories,

@@ -16,7 +16,8 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
-public class OrderPaymentEventKafkaPublisher implements PaymentRequestMessagePublisher {
+public class OrderPaymentEventKafkaPublisher implements PaymentRequestMessagePublisher
+{
     private final OrderMessagingDataMapper orderMessagingDataMapper;
     private final KafkaProducer<String, PaymentRequestAvroModel> kafkaProducer;
     private final OrderServiceConfigData orderServiceConfigData;
@@ -25,7 +26,8 @@ public class OrderPaymentEventKafkaPublisher implements PaymentRequestMessagePub
     public OrderPaymentEventKafkaPublisher(OrderMessagingDataMapper orderMessagingDataMapper,
                                            KafkaProducer<String, PaymentRequestAvroModel> kafkaProducer,
                                            OrderServiceConfigData orderServiceConfigData,
-                                           KafkaMessageHelper kafkaMessageHelper) {
+                                           KafkaMessageHelper kafkaMessageHelper)
+    {
         this.orderMessagingDataMapper = orderMessagingDataMapper;
         this.kafkaProducer = kafkaProducer;
         this.orderServiceConfigData = orderServiceConfigData;
@@ -34,39 +36,43 @@ public class OrderPaymentEventKafkaPublisher implements PaymentRequestMessagePub
 
     @Override
     public void publish(OrderPaymentOutboxMessage orderPaymentOutboxMessage,
-                        BiConsumer<OrderPaymentOutboxMessage, OutboxStatus> outboxCallback) {
+                        BiConsumer<OrderPaymentOutboxMessage, OutboxStatus> outboxCallback)
+    {
         OrderPaymentEventPayload orderPaymentEventPayload = kafkaMessageHelper.getOrderEventPayload(orderPaymentOutboxMessage.getPayload(),
-                OrderPaymentEventPayload.class);
+                                                                                                    OrderPaymentEventPayload.class);
 
         String sagaId = orderPaymentOutboxMessage.getSagaId()
-                .toString();
+                                                 .toString();
 
         log.info("Received OrderPaymentOutboxMessage for order id: {} and saga id: {}",
-                orderPaymentEventPayload.getOrderId(),
-                sagaId);
+                 orderPaymentEventPayload.getOrderId(),
+                 sagaId);
 
-        try {
+        try
+        {
             PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderPaymentEventToPaymentRequestAvroModel(sagaId,
-                    orderPaymentEventPayload);
+                                                                                                                                  orderPaymentEventPayload);
 
             kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(),
-                    sagaId,
-                    paymentRequestAvroModel,
-                    kafkaMessageHelper.getKafkaCallback(orderServiceConfigData.getPaymentRequestTopicName(),
-                            paymentRequestAvroModel,
-                            orderPaymentOutboxMessage,
-                            outboxCallback,
-                            orderPaymentEventPayload.getOrderId(),
-                            "PaymentRequestAvroModel"));
+                               sagaId,
+                               paymentRequestAvroModel,
+                               kafkaMessageHelper.getKafkaCallback(orderServiceConfigData.getPaymentRequestTopicName(),
+                                                                   paymentRequestAvroModel,
+                                                                   orderPaymentOutboxMessage,
+                                                                   outboxCallback,
+                                                                   orderPaymentEventPayload.getOrderId(),
+                                                                   "PaymentRequestAvroModel"));
 
             log.info("OrderPaymentEventPayload sent to Kafka for order id: {} and saga id: {}",
-                    orderPaymentEventPayload.getOrderId(),
-                    sagaId);
-        } catch (Exception e) {
+                     orderPaymentEventPayload.getOrderId(),
+                     sagaId);
+        }
+        catch (Exception e)
+        {
             log.error("Error while sending OrderPaymentEventPayload" + " to kafka with order id: {} and saga id: {}, error: {}",
-                    orderPaymentEventPayload.getOrderId(),
-                    sagaId,
-                    e.getMessage());
+                      orderPaymentEventPayload.getOrderId(),
+                      sagaId,
+                      e.getMessage());
         }
     }
 }

@@ -17,58 +17,63 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecordBase> {
+public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecordBase>
+{
     private final KafkaConfigData kafkaConfigData;
     private final KafkaConsumerConfigData kafkaConsumerConfigData;
 
     public KafkaConsumerConfig(KafkaConfigData kafkaConfigData,
-                               KafkaConsumerConfigData kafkaConsumerConfigData) {
+                               KafkaConsumerConfigData kafkaConsumerConfigData)
+    {
         this.kafkaConfigData = kafkaConfigData;
         this.kafkaConsumerConfigData = kafkaConsumerConfigData;
     }
 
     @Bean
-    public Map<String, Object> consumerConfigs() {
+    public Map<String, Object> consumerConfigs()
+    {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                kafkaConfigData.getBootstrapServers());
+                  kafkaConfigData.getBootstrapServers());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                kafkaConsumerConfigData.getKeyDeserializer());
+                  kafkaConsumerConfigData.getKeyDeserializer());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                kafkaConsumerConfigData.getValueDeserializer());
+                  kafkaConsumerConfigData.getValueDeserializer());
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,
-                kafkaConsumerConfigData.getAutoOffsetReset());
+                  kafkaConsumerConfigData.getAutoOffsetReset());
         props.put(kafkaConfigData.getSchemaRegistryUrlKey(),
-                kafkaConfigData.getSchemaRegistryUrl());
+                  kafkaConfigData.getSchemaRegistryUrl());
         props.put(kafkaConsumerConfigData.getSpecificAvroReaderKey(),
-                kafkaConsumerConfigData.getSpecificAvroReader());
+                  kafkaConsumerConfigData.getSpecificAvroReader());
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG,
-                kafkaConsumerConfigData.getSessionTimeoutMs());
+                  kafkaConsumerConfigData.getSessionTimeoutMs());
         props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,
-                kafkaConsumerConfigData.getHeartbeatIntervalMs());
+                  kafkaConsumerConfigData.getHeartbeatIntervalMs());
         props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG,
-                kafkaConsumerConfigData.getMaxPollIntervalMs());
+                  kafkaConsumerConfigData.getMaxPollIntervalMs());
         props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG,
-                kafkaConsumerConfigData.getMaxPartitionFetchBytesDefault() * kafkaConsumerConfigData.getMaxPartitionFetchBytesBoostFactor());
+                  kafkaConsumerConfigData.getMaxPartitionFetchBytesDefault() * kafkaConsumerConfigData.getMaxPartitionFetchBytesBoostFactor());
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,
-                kafkaConsumerConfigData.getMaxPollRecords());
+                  kafkaConsumerConfigData.getMaxPollRecords());
         return props;
     }
 
     @Bean
-    public ConsumerFactory<K, V> consumerFactory() {
+    public ConsumerFactory<K, V> consumerFactory()
+    {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<K, V>> kafkaListenerContainerFactory() {
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<K, V>> kafkaListenerContainerFactory()
+    {
         ConcurrentKafkaListenerContainerFactory<K, V> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(kafkaConsumerConfigData.getBatchListener());
         factory.setConcurrency(kafkaConsumerConfigData.getConcurrencyLevel());
         factory.setAutoStartup(kafkaConsumerConfigData.getAutoStartup());
         factory.getContainerProperties()
-                .setPollTimeout(kafkaConsumerConfigData.getPollTimeoutMs());
+               .setPollTimeout(kafkaConsumerConfigData.getPollTimeoutMs());
         return factory;
     }
 }

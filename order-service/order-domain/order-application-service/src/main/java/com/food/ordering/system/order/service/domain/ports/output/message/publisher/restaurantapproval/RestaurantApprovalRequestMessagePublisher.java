@@ -5,7 +5,8 @@ import com.food.ordering.system.outbox.OutboxStatus;
 
 import java.util.function.BiConsumer;
 
-public interface RestaurantApprovalRequestMessagePublisher {
+public interface RestaurantApprovalRequestMessagePublisher
+{
     void publish(OrderApprovalOutboxMessage orderApprovalOutboxMessage,
                  BiConsumer<OrderApprovalOutboxMessage, OutboxStatus> outboxCallback);
 }

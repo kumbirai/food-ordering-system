@@ -12,7 +12,8 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateOrderCommand {
+public class CreateOrderCommand
+{
     @NotNull
     private final UUID customerId;
     @NotNull

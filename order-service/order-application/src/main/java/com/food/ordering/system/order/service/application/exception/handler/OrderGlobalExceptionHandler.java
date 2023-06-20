@@ -13,28 +13,31 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
 @ControllerAdvice
-public class OrderGlobalExceptionHandler extends GlobalExceptionHandler {
+public class OrderGlobalExceptionHandler extends GlobalExceptionHandler
+{
     @ResponseBody
     @ExceptionHandler(value = {OrderDomainException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handleException(OrderDomainException orderDomainException) {
+    public ErrorDTO handleException(OrderDomainException orderDomainException)
+    {
         log.error(orderDomainException.getMessage(),
-                orderDomainException);
+                  orderDomainException);
         return ErrorDTO.builder()
-                .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(orderDomainException.getMessage())
-                .build();
+                       .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                       .message(orderDomainException.getMessage())
+                       .build();
     }
 
     @ResponseBody
     @ExceptionHandler(value = {OrderNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDTO handleException(OrderNotFoundException orderNotFoundException) {
+    public ErrorDTO handleException(OrderNotFoundException orderNotFoundException)
+    {
         log.error(orderNotFoundException.getMessage(),
-                orderNotFoundException);
+                  orderNotFoundException);
         return ErrorDTO.builder()
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .message(orderNotFoundException.getMessage())
-                .build();
+                       .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                       .message(orderNotFoundException.getMessage())
+                       .build();
     }
 }

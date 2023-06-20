@@ -6,7 +6,8 @@ import org.springframework.kafka.support.SendResult;
 import java.io.Serializable;
 import java.util.function.BiConsumer;
 
-public interface KafkaProducer<K extends Serializable, V extends SpecificRecordBase> {
+public interface KafkaProducer<K extends Serializable, V extends SpecificRecordBase>
+{
     void send(String topicName,
               K key,
               V message,

@@ -11,7 +11,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface OrderOutboxJpaRepository extends JpaRepository<OrderOutboxEntity, UUID> {
+public interface OrderOutboxJpaRepository extends JpaRepository<OrderOutboxEntity, UUID>
+{
     Optional<List<OrderOutboxEntity>> findByTypeAndOutboxStatus(String type,
                                                                 OutboxStatus outboxStatus);
 

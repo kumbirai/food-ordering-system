@@ -15,7 +15,11 @@ import org.springframework.dao.DataAccessException;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,7 +30,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 @SpringBootTest(classes = PaymentServiceApplication.class)
-public class PaymentRequestMessageListenerTest {
+class PaymentRequestMessageListenerTest
+{
     private final static String CUSTOMER_ID = "d215b5f8-0249-4dc5-89a3-51fd148cfb41";
     private final static BigDecimal PRICE = new BigDecimal("100");
     @Autowired
@@ -35,85 +40,104 @@ public class PaymentRequestMessageListenerTest {
     private OrderOutboxJpaRepository orderOutboxJpaRepository;
 
     @Test
-    void testDoublePayment() {
+    void testDoublePayment()
+    {
         String sagaId = UUID.randomUUID()
-                .toString();
+                            .toString();
         paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
-        try {
+        try
+        {
             paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
-        } catch (DataAccessException e) {
+        }
+        catch (DataAccessException e)
+        {
             log.error("DataAccessException occurred with sql state: {}",
-                    ((PSQLException) Objects.requireNonNull(e.getRootCause())).getSQLState());
+                      ((PSQLException) Objects.requireNonNull(e.getRootCause())).getSQLState());
         }
         assertOrderOutbox(sagaId);
     }
 
     @Test
-    void testDoublePaymentWithThreads() {
+    void testDoublePaymentWithThreads()
+    {
         String sagaId = UUID.randomUUID()
-                .toString();
+                            .toString();
         ExecutorService executor = null;
 
-        try {
+        try
+        {
             executor = Executors.newFixedThreadPool(2);
             List<Callable<Object>> tasks = new ArrayList<>();
 
             tasks.add(Executors.callable(() ->
-            {
-                try {
-                    paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
-                } catch (DataAccessException e) {
-                    log.error("DataAccessException occurred for thread 1 with sql state: {}",
-                            ((PSQLException) Objects.requireNonNull(e.getRootCause())).getSQLState());
-                }
-            }));
+                                         {
+                                             try
+                                             {
+                                                 paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
+                                             }
+                                             catch (DataAccessException e)
+                                             {
+                                                 log.error("DataAccessException occurred for thread 1 with sql state: {}",
+                                                           ((PSQLException) Objects.requireNonNull(e.getRootCause())).getSQLState());
+                                             }
+                                         }));
 
             tasks.add(Executors.callable(() ->
-            {
-                try {
-                    paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
-                } catch (DataAccessException e) {
-                    log.error("DataAccessException occurred for thread 2 with sql state: {}",
-                            ((PSQLException) Objects.requireNonNull(e.getRootCause())).getSQLState());
-                }
-            }));
+                                         {
+                                             try
+                                             {
+                                                 paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
+                                             }
+                                             catch (DataAccessException e)
+                                             {
+                                                 log.error("DataAccessException occurred for thread 2 with sql state: {}",
+                                                           ((PSQLException) Objects.requireNonNull(e.getRootCause())).getSQLState());
+                                             }
+                                         }));
 
             executor.invokeAll(tasks);
 
             assertOrderOutbox(sagaId);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             log.error("Error calling complete payment!",
-                    e);
-        } finally {
-            if (executor != null) {
+                      e);
+        }
+        finally
+        {
+            if (executor != null)
+            {
                 executor.shutdown();
             }
         }
     }
 
-    private void assertOrderOutbox(String sagaId) {
+    private void assertOrderOutbox(String sagaId)
+    {
         Optional<OrderOutboxEntity> orderOutboxEntity = orderOutboxJpaRepository.findByTypeAndSagaIdAndPaymentStatusAndOutboxStatus(ORDER_SAGA_NAME,
-                UUID.fromString(sagaId),
-                PaymentStatus.COMPLETED,
-                OutboxStatus.STARTED);
+                                                                                                                                    UUID.fromString(sagaId),
+                                                                                                                                    PaymentStatus.COMPLETED,
+                                                                                                                                    OutboxStatus.STARTED);
         assertTrue(orderOutboxEntity.isPresent());
         assertEquals(orderOutboxEntity.get()
-                        .getSagaId()
-                        .toString(),
-                sagaId);
+                                      .getSagaId()
+                                      .toString(),
+                     sagaId);
     }
 
-    private PaymentRequest getPaymentRequest(String sagaId) {
+    private PaymentRequest getPaymentRequest(String sagaId)
+    {
         return PaymentRequest.builder()
-                .id(UUID.randomUUID()
-                        .toString())
-                .sagaId(sagaId)
-                .orderId(UUID.randomUUID()
-                        .toString())
-                .paymentOrderStatus(com.food.ordering.system.domain.valueobject.PaymentOrderStatus.PENDING)
-                .customerId(CUSTOMER_ID)
-                .price(PRICE)
-                .createdAt(Instant.now())
-                .build();
+                             .id(UUID.randomUUID()
+                                     .toString())
+                             .sagaId(sagaId)
+                             .orderId(UUID.randomUUID()
+                                          .toString())
+                             .paymentOrderStatus(com.food.ordering.system.domain.valueobject.PaymentOrderStatus.PENDING)
+                             .customerId(CUSTOMER_ID)
+                             .price(PRICE)
+                             .createdAt(Instant.now())
+                             .build();
     }
 }

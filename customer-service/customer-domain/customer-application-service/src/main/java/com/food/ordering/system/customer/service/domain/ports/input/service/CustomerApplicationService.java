@@ -4,6 +4,7 @@ import com.food.ordering.system.customer.service.domain.create.CreateCustomerCom
 import com.food.ordering.system.customer.service.domain.create.CreateCustomerResponse;
 import jakarta.validation.Valid;
 
-public interface CustomerApplicationService {
+public interface CustomerApplicationService
+{
     CreateCustomerResponse createCustomer(@Valid CreateCustomerCommand createCustomerCommand);
 }

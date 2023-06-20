@@ -7,18 +7,21 @@ import com.food.ordering.system.restaurant.service.domain.ports.output.repositor
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderApprovalRepositoryImpl implements OrderApprovalRepository {
+public class OrderApprovalRepositoryImpl implements OrderApprovalRepository
+{
     private final OrderApprovalJpaRepository orderApprovalJpaRepository;
     private final RestaurantDataAccessMapper restaurantDataAccessMapper;
 
     public OrderApprovalRepositoryImpl(OrderApprovalJpaRepository orderApprovalJpaRepository,
-                                       RestaurantDataAccessMapper restaurantDataAccessMapper) {
+                                       RestaurantDataAccessMapper restaurantDataAccessMapper)
+    {
         this.orderApprovalJpaRepository = orderApprovalJpaRepository;
         this.restaurantDataAccessMapper = restaurantDataAccessMapper;
     }
 
     @Override
-    public OrderApproval save(OrderApproval orderApproval) {
+    public OrderApproval save(OrderApproval orderApproval)
+    {
         return restaurantDataAccessMapper.orderApprovalEntityToOrderApproval(orderApprovalJpaRepository.save(restaurantDataAccessMapper.orderApprovalToOrderApprovalEntity(orderApproval)));
     }
 }

@@ -14,36 +14,40 @@ import java.util.List;
 import static com.food.ordering.system.domain.DomainConstants.UTC;
 
 @Slf4j
-public class RestaurantDomainServiceImpl implements RestaurantDomainService {
+public class RestaurantDomainServiceImpl implements RestaurantDomainService
+{
     @Override
     public OrderApprovalEvent validateOrder(Restaurant restaurant,
-                                            List<String> failureMessages) {
+                                            List<String> failureMessages)
+    {
         restaurant.validateOrder(failureMessages);
         log.info("Validating order with id: {}",
-                restaurant.getOrderDetail()
-                        .getId()
-                        .getValue());
+                 restaurant.getOrderDetail()
+                           .getId()
+                           .getValue());
 
-        if (failureMessages.isEmpty()) {
+        if (failureMessages.isEmpty())
+        {
             log.info("Order is approved for order id: {}",
-                    restaurant.getOrderDetail()
-                            .getId()
-                            .getValue());
+                     restaurant.getOrderDetail()
+                               .getId()
+                               .getValue());
             restaurant.constructOrderApproval(OrderApprovalStatus.APPROVED);
             return new OrderApprovedEvent(restaurant.getOrderApproval(),
-                    restaurant.getId(),
-                    failureMessages,
-                    ZonedDateTime.now(ZoneId.of(UTC)));
-        } else {
+                                          restaurant.getId(),
+                                          failureMessages,
+                                          ZonedDateTime.now(ZoneId.of(UTC)));
+        } else
+        {
             log.info("Order is rejected for order id: {}",
-                    restaurant.getOrderDetail()
-                            .getId()
-                            .getValue());
+                     restaurant.getOrderDetail()
+                               .getId()
+                               .getValue());
             restaurant.constructOrderApproval(OrderApprovalStatus.REJECTED);
             return new OrderRejectedEvent(restaurant.getOrderApproval(),
-                    restaurant.getId(),
-                    failureMessages,
-                    ZonedDateTime.now(ZoneId.of(UTC)));
+                                          restaurant.getId(),
+                                          failureMessages,
+                                          ZonedDateTime.now(ZoneId.of(UTC)));
         }
     }
 }

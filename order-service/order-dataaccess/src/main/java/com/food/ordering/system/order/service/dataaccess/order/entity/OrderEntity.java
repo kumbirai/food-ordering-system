@@ -1,9 +1,21 @@
 package com.food.ordering.system.order.service.dataaccess.order.entity;
 
 import com.food.ordering.system.domain.valueobject.OrderStatus;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +28,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "orders")
 @Entity
-public class OrderEntity {
+public class OrderEntity implements Serializable
+{
     @Id
     private UUID id;
     private UUID customerId;
@@ -27,14 +40,15 @@ public class OrderEntity {
     private OrderStatus orderStatus;
     private String failureMessages;
     @OneToOne(mappedBy = "order",
-            cascade = CascadeType.ALL)
+              cascade = CascadeType.ALL)
     private OrderAddressEntity address;
     @OneToMany(mappedBy = "order",
-            cascade = CascadeType.ALL)
+               cascade = CascadeType.ALL)
     private List<OrderItemEntity> items;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderEntity that = (OrderEntity) o;
@@ -42,7 +56,8 @@ public class OrderEntity {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id);
     }
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface CreditEntryJpaRepository extends JpaRepository<CreditEntryEntity, UUID> {
+public interface CreditEntryJpaRepository extends JpaRepository<CreditEntryEntity, UUID>
+{
     Optional<CreditEntryEntity> findByCustomerId(UUID customerId);
 }

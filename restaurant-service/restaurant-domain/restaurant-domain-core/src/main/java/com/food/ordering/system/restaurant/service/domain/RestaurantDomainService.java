@@ -5,7 +5,8 @@ import com.food.ordering.system.restaurant.service.domain.event.OrderApprovalEve
 
 import java.util.List;
 
-public interface RestaurantDomainService {
+public interface RestaurantDomainService
+{
     OrderApprovalEvent validateOrder(Restaurant restaurant,
                                      List<String> failureMessages);
 }

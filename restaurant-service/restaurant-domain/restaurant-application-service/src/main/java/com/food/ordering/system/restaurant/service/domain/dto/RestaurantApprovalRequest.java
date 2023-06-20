@@ -9,7 +9,8 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class RestaurantApprovalRequest {
+public class RestaurantApprovalRequest
+{
     private String id;
     private String sagaId;
     private String restaurantId;

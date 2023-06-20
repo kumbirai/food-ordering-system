@@ -2,19 +2,23 @@ package com.food.ordering.system.domain.entity;
 
 import java.util.Objects;
 
-public abstract class BaseEntity<ID> {
-    private ID id;
+public abstract class BaseEntity<I>
+{
+    private I id;
 
-    public ID getId() {
+    public I getId()
+    {
         return id;
     }
 
-    public void setId(ID id) {
+    public void setId(I id)
+    {
         this.id = id;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BaseEntity<?> that = (BaseEntity<?>) o;
@@ -22,7 +26,8 @@ public abstract class BaseEntity<ID> {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id);
     }
 }

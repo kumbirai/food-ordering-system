@@ -11,7 +11,8 @@ import java.time.ZonedDateTime;
 @Getter
 @Builder
 @AllArgsConstructor
-public class OrderPaymentEventPayload {
+public class OrderPaymentEventPayload
+{
     @JsonProperty
     private String orderId;
     @JsonProperty

@@ -10,7 +10,8 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateCustomerResponse {
+public class CreateCustomerResponse
+{
     @NotNull
     private final UUID customerId;
     @NotNull

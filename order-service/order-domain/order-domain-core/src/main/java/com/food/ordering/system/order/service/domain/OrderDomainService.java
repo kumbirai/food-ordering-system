@@ -8,7 +8,8 @@ import com.food.ordering.system.order.service.domain.event.OrderPaidEvent;
 
 import java.util.List;
 
-public interface OrderDomainService {
+public interface OrderDomainService
+{
     OrderCreatedEvent validateAndInitiateOrder(Order order,
                                                Restaurant restaurant);
 

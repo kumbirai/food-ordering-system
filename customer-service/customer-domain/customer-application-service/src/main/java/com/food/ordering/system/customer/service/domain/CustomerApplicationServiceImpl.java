@@ -13,24 +13,27 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 @Validated
 @Service
-class CustomerApplicationServiceImpl implements CustomerApplicationService {
+class CustomerApplicationServiceImpl implements CustomerApplicationService
+{
     private final CustomerCreateCommandHandler customerCreateCommandHandler;
     private final CustomerDataMapper customerDataMapper;
     private final CustomerMessagePublisher customerMessagePublisher;
 
     public CustomerApplicationServiceImpl(CustomerCreateCommandHandler customerCreateCommandHandler,
                                           CustomerDataMapper customerDataMapper,
-                                          CustomerMessagePublisher customerMessagePublisher) {
+                                          CustomerMessagePublisher customerMessagePublisher)
+    {
         this.customerCreateCommandHandler = customerCreateCommandHandler;
         this.customerDataMapper = customerDataMapper;
         this.customerMessagePublisher = customerMessagePublisher;
     }
 
     @Override
-    public CreateCustomerResponse createCustomer(CreateCustomerCommand createCustomerCommand) {
+    public CreateCustomerResponse createCustomer(CreateCustomerCommand createCustomerCommand)
+    {
         CustomerCreatedEvent customerCreatedEvent = customerCreateCommandHandler.createCustomer(createCustomerCommand);
         customerMessagePublisher.publish(customerCreatedEvent);
         return customerDataMapper.customerToCreateCustomerResponse(customerCreatedEvent.getCustomer(),
-                "Customer saved successfully!");
+                                                                   "Customer saved successfully!");
     }
 }

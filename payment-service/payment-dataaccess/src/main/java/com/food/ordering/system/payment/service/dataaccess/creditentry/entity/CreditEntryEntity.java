@@ -3,8 +3,13 @@ package com.food.ordering.system.payment.service.dataaccess.creditentry.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,14 +21,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "credit_entry")
 @Entity
-public class CreditEntryEntity {
+public class CreditEntryEntity implements Serializable
+{
     @Id
     private UUID id;
     private UUID customerId;
     private BigDecimal totalCreditAmount;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreditEntryEntity that = (CreditEntryEntity) o;
@@ -31,7 +38,8 @@ public class CreditEntryEntity {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id);
     }
 }

@@ -6,14 +6,16 @@ import com.food.ordering.system.restaurant.service.domain.entity.OrderApproval;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public class OrderApprovedEvent extends OrderApprovalEvent {
+public class OrderApprovedEvent extends OrderApprovalEvent
+{
     public OrderApprovedEvent(OrderApproval orderApproval,
                               RestaurantId restaurantId,
                               List<String> failureMessages,
-                              ZonedDateTime createdAt) {
+                              ZonedDateTime createdAt)
+    {
         super(orderApproval,
-                restaurantId,
-                failureMessages,
-                createdAt);
+              restaurantId,
+              failureMessages,
+              createdAt);
     }
 }

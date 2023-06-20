@@ -1,9 +1,18 @@
 package com.food.ordering.system.payment.service.dataaccess.payment.entity;
 
 import com.food.ordering.system.domain.valueobject.PaymentStatus;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -16,7 +25,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "payments")
 @Entity
-public class PaymentEntity {
+public class PaymentEntity implements Serializable
+{
     @Id
     private UUID id;
     private UUID customerId;
@@ -27,7 +37,8 @@ public class PaymentEntity {
     private ZonedDateTime createdAt;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentEntity that = (PaymentEntity) o;
@@ -35,7 +46,8 @@ public class PaymentEntity {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id);
     }
 }

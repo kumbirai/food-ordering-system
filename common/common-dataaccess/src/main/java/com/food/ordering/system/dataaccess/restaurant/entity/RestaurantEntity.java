@@ -4,7 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -17,9 +21,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @IdClass(RestaurantEntityId.class)
 @Table(name = "order_restaurant_m_view",
-        schema = "restaurant")
+       schema = "restaurant")
 @Entity
-public class RestaurantEntity {
+public class RestaurantEntity
+{
     @Id
     private UUID restaurantId;
     @Id
@@ -31,7 +36,8 @@ public class RestaurantEntity {
     private Boolean productAvailable;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RestaurantEntity that = (RestaurantEntity) o;
@@ -39,8 +45,9 @@ public class RestaurantEntity {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(restaurantId,
-                productId);
+                            productId);
     }
 }

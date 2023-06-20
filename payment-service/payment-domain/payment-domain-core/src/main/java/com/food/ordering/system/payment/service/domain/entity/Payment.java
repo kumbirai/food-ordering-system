@@ -12,14 +12,18 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class Payment extends AggregateRoot<PaymentId> {
+import static com.food.ordering.system.domain.DomainConstants.UTC;
+
+public class Payment extends AggregateRoot<PaymentId>
+{
     private final OrderId orderId;
     private final CustomerId customerId;
     private final Money price;
     private PaymentStatus paymentStatus;
     private ZonedDateTime createdAt;
 
-    private Payment(Builder builder) {
+    private Payment(Builder builder)
+    {
         setId(builder.paymentId);
         orderId = builder.orderId;
         customerId = builder.customerId;
@@ -28,46 +32,57 @@ public class Payment extends AggregateRoot<PaymentId> {
         createdAt = builder.createdAt;
     }
 
-    public static Builder builder() {
+    public static Builder builder()
+    {
         return new Builder();
     }
 
-    public void initializePayment() {
+    public void initializePayment()
+    {
         setId(new PaymentId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        createdAt = ZonedDateTime.now(ZoneId.of(UTC));
     }
 
-    public void validatePayment(List<String> failureMessages) {
-        if (price == null || !price.isGreaterThanZero()) {
+    public void validatePayment(List<String> failureMessages)
+    {
+        if (price == null || !price.isGreaterThanZero())
+        {
             failureMessages.add("Total price must be greater than zero!");
         }
     }
 
-    public void updateStatus(PaymentStatus paymentStatus) {
+    public void updateStatus(PaymentStatus paymentStatus)
+    {
         this.paymentStatus = paymentStatus;
     }
 
-    public OrderId getOrderId() {
+    public OrderId getOrderId()
+    {
         return orderId;
     }
 
-    public CustomerId getCustomerId() {
+    public CustomerId getCustomerId()
+    {
         return customerId;
     }
 
-    public Money getPrice() {
+    public Money getPrice()
+    {
         return price;
     }
 
-    public PaymentStatus getPaymentStatus() {
+    public PaymentStatus getPaymentStatus()
+    {
         return paymentStatus;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt()
+    {
         return createdAt;
     }
 
-    public static final class Builder {
+    public static final class Builder
+    {
         private PaymentId paymentId;
         private OrderId orderId;
         private CustomerId customerId;
@@ -75,40 +90,48 @@ public class Payment extends AggregateRoot<PaymentId> {
         private PaymentStatus paymentStatus;
         private ZonedDateTime createdAt;
 
-        private Builder() {
+        private Builder()
+        {
         }
 
-        public Builder paymentId(PaymentId val) {
+        public Builder paymentId(PaymentId val)
+        {
             paymentId = val;
             return this;
         }
 
-        public Builder orderId(OrderId val) {
+        public Builder orderId(OrderId val)
+        {
             orderId = val;
             return this;
         }
 
-        public Builder customerId(CustomerId val) {
+        public Builder customerId(CustomerId val)
+        {
             customerId = val;
             return this;
         }
 
-        public Builder price(Money val) {
+        public Builder price(Money val)
+        {
             price = val;
             return this;
         }
 
-        public Builder paymentStatus(PaymentStatus val) {
+        public Builder paymentStatus(PaymentStatus val)
+        {
             paymentStatus = val;
             return this;
         }
 
-        public Builder createdAt(ZonedDateTime val) {
+        public Builder createdAt(ZonedDateTime val)
+        {
             createdAt = val;
             return this;
         }
 
-        public Payment build() {
+        public Payment build()
+        {
             return new Payment(this);
         }
     }

@@ -11,7 +11,8 @@ import java.time.Instant;
 @Getter
 @Builder
 @AllArgsConstructor
-public class PaymentRequest {
+public class PaymentRequest
+{
     private String id;
     private String sagaId;
     private String orderId;
@@ -20,7 +21,8 @@ public class PaymentRequest {
     private Instant createdAt;
     private PaymentOrderStatus paymentOrderStatus;
 
-    public void setPaymentOrderStatus(PaymentOrderStatus paymentOrderStatus) {
+    public void setPaymentOrderStatus(PaymentOrderStatus paymentOrderStatus)
+    {
         this.paymentOrderStatus = paymentOrderStatus;
     }
 }

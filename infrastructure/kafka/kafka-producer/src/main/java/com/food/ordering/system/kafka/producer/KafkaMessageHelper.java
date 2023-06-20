@@ -13,24 +13,30 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
-public class KafkaMessageHelper {
+public class KafkaMessageHelper
+{
     private final ObjectMapper objectMapper;
 
-    public KafkaMessageHelper(ObjectMapper objectMapper) {
+    public KafkaMessageHelper(ObjectMapper objectMapper)
+    {
         this.objectMapper = objectMapper;
     }
 
     public <T> T getOrderEventPayload(String payload,
-                                      Class<T> outputType) {
-        try {
+                                      Class<T> outputType)
+    {
+        try
+        {
             return objectMapper.readValue(payload,
-                    outputType);
-        } catch (JsonProcessingException e) {
+                                          outputType);
+        }
+        catch (JsonProcessingException e)
+        {
             log.error("Could not read {} object!",
-                    outputType.getName(),
-                    e);
+                      outputType.getName(),
+                      e);
             throw new OrderDomainException("Could not read " + outputType.getName() + " object!",
-                    e);
+                                           e);
         }
     }
 
@@ -39,29 +45,32 @@ public class KafkaMessageHelper {
                                                                                 U outboxMessage,
                                                                                 BiConsumer<U, OutboxStatus> outboxCallback,
                                                                                 String orderId,
-                                                                                String avroModelName) {
+                                                                                String avroModelName)
+    {
         return (result, ex) ->
         {
-            if (ex == null) {
+            if (ex == null)
+            {
                 RecordMetadata metadata = result.getRecordMetadata();
                 log.info("Received successful response from Kafka for order id: {}" + " Topic: {} Partition: {} Offset: {} Timestamp: {}",
-                        orderId,
-                        metadata.topic(),
-                        metadata.partition(),
-                        metadata.offset(),
-                        metadata.timestamp());
+                         orderId,
+                         metadata.topic(),
+                         metadata.partition(),
+                         metadata.offset(),
+                         metadata.timestamp());
                 outboxCallback.accept(outboxMessage,
-                        OutboxStatus.COMPLETED);
-            } else {
+                                      OutboxStatus.COMPLETED);
+            } else
+            {
                 log.error("Error while sending {} with message: {} and outbox type: {} to topic {}",
-                        avroModelName,
-                        avroModel.toString(),
-                        outboxMessage.getClass()
-                                .getName(),
-                        responseTopicName,
-                        ex);
+                          avroModelName,
+                          avroModel.toString(),
+                          outboxMessage.getClass()
+                                       .getName(),
+                          responseTopicName,
+                          ex);
                 outboxCallback.accept(outboxMessage,
-                        OutboxStatus.FAILED);
+                                      OutboxStatus.FAILED);
             }
         };
     }

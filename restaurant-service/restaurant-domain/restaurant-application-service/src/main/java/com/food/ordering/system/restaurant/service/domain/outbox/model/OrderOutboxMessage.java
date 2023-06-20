@@ -12,7 +12,8 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class OrderOutboxMessage {
+public class OrderOutboxMessage
+{
     private UUID id;
     private UUID sagaId;
     private ZonedDateTime createdAt;
@@ -23,7 +24,8 @@ public class OrderOutboxMessage {
     private OrderApprovalStatus approvalStatus;
     private int version;
 
-    public void setOutboxStatus(OutboxStatus status) {
+    public void setOutboxStatus(OutboxStatus status)
+    {
         this.outboxStatus = status;
     }
 }

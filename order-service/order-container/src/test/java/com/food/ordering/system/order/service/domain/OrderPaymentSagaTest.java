@@ -27,8 +27,9 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
 @SpringBootTest(classes = OrderServiceApplication.class)
 @Sql(value = {"classpath:sql/OrderPaymentSagaTestSetUp.sql"})
 @Sql(value = {"classpath:sql/OrderPaymentSagaTestCleanUp.sql"},
-        executionPhase = AFTER_TEST_METHOD)
-public class OrderPaymentSagaTest {
+     executionPhase = AFTER_TEST_METHOD)
+class OrderPaymentSagaTest
+{
     private final UUID SAGA_ID = UUID.fromString("15a497c1-0f4b-4eff-b9f4-c402c8c07afa");
     private final UUID ORDER_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb17");
     private final UUID CUSTOMER_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb41");
@@ -40,13 +41,15 @@ public class OrderPaymentSagaTest {
     private PaymentOutboxJpaRepository paymentOutboxJpaRepository;
 
     @Test
-    void testDoublePayment() {
+    void testDoublePayment()
+    {
         orderPaymentSaga.process(getPaymentResponse());
         orderPaymentSaga.process(getPaymentResponse());
     }
 
     @Test
-    void testDoublePaymentWithThreads() throws InterruptedException {
+    void testDoublePaymentWithThreads() throws InterruptedException
+    {
         Thread thread1 = new Thread(() -> orderPaymentSaga.process(getPaymentResponse()));
         Thread thread2 = new Thread(() -> orderPaymentSaga.process(getPaymentResponse()));
 
@@ -60,30 +63,41 @@ public class OrderPaymentSagaTest {
     }
 
     @Test
-    void testDoublePaymentWithLatch() throws InterruptedException {
+    void testDoublePaymentWithLatch() throws InterruptedException
+    {
         CountDownLatch latch = new CountDownLatch(2);
 
         Thread thread1 = new Thread(() ->
-        {
-            try {
-                orderPaymentSaga.process(getPaymentResponse());
-            } catch (OptimisticLockingFailureException e) {
-                log.error("OptimisticLockingFailureException occurred for thread1");
-            } finally {
-                latch.countDown();
-            }
-        });
+                                    {
+                                        try
+                                        {
+                                            orderPaymentSaga.process(getPaymentResponse());
+                                        }
+                                        catch (OptimisticLockingFailureException e)
+                                        {
+                                            log.error("OptimisticLockingFailureException occurred for thread1");
+                                        }
+                                        finally
+                                        {
+                                            latch.countDown();
+                                        }
+                                    });
 
         Thread thread2 = new Thread(() ->
-        {
-            try {
-                orderPaymentSaga.process(getPaymentResponse());
-            } catch (OptimisticLockingFailureException e) {
-                log.error("OptimisticLockingFailureException occurred for thread2");
-            } finally {
-                latch.countDown();
-            }
-        });
+                                    {
+                                        try
+                                        {
+                                            orderPaymentSaga.process(getPaymentResponse());
+                                        }
+                                        catch (OptimisticLockingFailureException e)
+                                        {
+                                            log.error("OptimisticLockingFailureException occurred for thread2");
+                                        }
+                                        finally
+                                        {
+                                            latch.countDown();
+                                        }
+                                    });
 
         thread1.start();
         thread2.start();
@@ -93,25 +107,27 @@ public class OrderPaymentSagaTest {
         assertPaymentOutbox();
     }
 
-    private void assertPaymentOutbox() {
+    private void assertPaymentOutbox()
+    {
         Optional<PaymentOutboxEntity> paymentOutboxEntity = paymentOutboxJpaRepository.findByTypeAndSagaIdAndSagaStatusIn(ORDER_SAGA_NAME,
-                SAGA_ID,
-                List.of(SagaStatus.PROCESSING));
+                                                                                                                          SAGA_ID,
+                                                                                                                          List.of(SagaStatus.PROCESSING));
         assertTrue(paymentOutboxEntity.isPresent());
     }
 
-    private PaymentResponse getPaymentResponse() {
+    private PaymentResponse getPaymentResponse()
+    {
         return PaymentResponse.builder()
-                .id(UUID.randomUUID()
-                        .toString())
-                .sagaId(SAGA_ID.toString())
-                .paymentStatus(com.food.ordering.system.domain.valueobject.PaymentStatus.COMPLETED)
-                .paymentId(PAYMENT_ID.toString())
-                .orderId(ORDER_ID.toString())
-                .customerId(CUSTOMER_ID.toString())
-                .price(PRICE)
-                .createdAt(Instant.now())
-                .failureMessages(new ArrayList<>())
-                .build();
+                              .id(UUID.randomUUID()
+                                      .toString())
+                              .sagaId(SAGA_ID.toString())
+                              .paymentStatus(com.food.ordering.system.domain.valueobject.PaymentStatus.COMPLETED)
+                              .paymentId(PAYMENT_ID.toString())
+                              .orderId(ORDER_ID.toString())
+                              .customerId(CUSTOMER_ID.toString())
+                              .price(PRICE)
+                              .createdAt(Instant.now())
+                              .failureMessages(new ArrayList<>())
+                              .build();
     }
 }

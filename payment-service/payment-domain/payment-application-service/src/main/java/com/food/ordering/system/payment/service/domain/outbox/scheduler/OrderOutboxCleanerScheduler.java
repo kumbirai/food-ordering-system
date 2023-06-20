@@ -13,26 +13,30 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class OrderOutboxCleanerScheduler implements OutboxScheduler {
+public class OrderOutboxCleanerScheduler implements OutboxScheduler
+{
     private final OrderOutboxHelper orderOutboxHelper;
 
-    public OrderOutboxCleanerScheduler(OrderOutboxHelper orderOutboxHelper) {
+    public OrderOutboxCleanerScheduler(OrderOutboxHelper orderOutboxHelper)
+    {
         this.orderOutboxHelper = orderOutboxHelper;
     }
 
     @Override
     @Transactional
     @Scheduled(cron = "@midnight")
-    public void processOutboxMessage() {
+    public void processOutboxMessage()
+    {
         Optional<List<OrderOutboxMessage>> outboxMessagesResponse = orderOutboxHelper.getOrderOutboxMessageByOutboxStatus(OutboxStatus.COMPLETED);
-        if (outboxMessagesResponse.isPresent() && outboxMessagesResponse.get()
-                .size() > 0) {
+        if (outboxMessagesResponse.isPresent() && !outboxMessagesResponse.get()
+                                                                         .isEmpty())
+        {
             List<OrderOutboxMessage> outboxMessages = outboxMessagesResponse.get();
             log.info("Received {} OrderOutboxMessage for clean-up!",
-                    outboxMessages.size());
+                     outboxMessages.size());
             orderOutboxHelper.deleteOrderOutboxMessageByOutboxStatus(OutboxStatus.COMPLETED);
             log.info("Deleted {} OrderOutboxMessage!",
-                    outboxMessages.size());
+                     outboxMessages.size());
         }
     }
 }

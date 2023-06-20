@@ -15,63 +15,72 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
-public class CustomerCreatedEventKafkaPublisher implements CustomerMessagePublisher {
+public class CustomerCreatedEventKafkaPublisher implements CustomerMessagePublisher
+{
     private final CustomerMessagingDataMapper customerMessagingDataMapper;
     private final KafkaProducer<String, CustomerAvroModel> kafkaProducer;
     private final CustomerServiceConfigData customerServiceConfigData;
 
     public CustomerCreatedEventKafkaPublisher(CustomerMessagingDataMapper customerMessagingDataMapper,
                                               KafkaProducer<String, CustomerAvroModel> kafkaProducer,
-                                              CustomerServiceConfigData customerServiceConfigData) {
+                                              CustomerServiceConfigData customerServiceConfigData)
+    {
         this.customerMessagingDataMapper = customerMessagingDataMapper;
         this.kafkaProducer = kafkaProducer;
         this.customerServiceConfigData = customerServiceConfigData;
     }
 
     @Override
-    public void publish(CustomerCreatedEvent customerCreatedEvent) {
+    public void publish(CustomerCreatedEvent customerCreatedEvent)
+    {
         log.info("Received CustomerCreatedEvent for customer id: {}",
-                customerCreatedEvent.getCustomer()
-                        .getId()
-                        .getValue());
-        try {
+                 customerCreatedEvent.getCustomer()
+                                     .getId()
+                                     .getValue());
+        try
+        {
             CustomerAvroModel customerAvroModel = customerMessagingDataMapper.paymentResponseAvroModelToPaymentResponse(customerCreatedEvent);
 
             kafkaProducer.send(customerServiceConfigData.getCustomerTopicName(),
-                    customerAvroModel.getId(),
-                    customerAvroModel,
-                    getCallback(customerServiceConfigData.getCustomerTopicName(),
-                            customerAvroModel));
+                               customerAvroModel.getId(),
+                               customerAvroModel,
+                               getCallback(customerServiceConfigData.getCustomerTopicName(),
+                                           customerAvroModel));
 
             log.info("CustomerCreatedEvent sent to kafka for customer id: {}",
-                    customerAvroModel.getId());
-        } catch (Exception e) {
+                     customerAvroModel.getId());
+        }
+        catch (Exception e)
+        {
             log.error("Error while sending CustomerCreatedEvent to kafka for customer id: {}," + " error: {}",
-                    customerCreatedEvent.getCustomer()
-                            .getId()
-                            .getValue(),
-                    e.getMessage());
+                      customerCreatedEvent.getCustomer()
+                                          .getId()
+                                          .getValue(),
+                      e.getMessage());
         }
     }
 
     private BiConsumer<SendResult<String, CustomerAvroModel>, Throwable> getCallback(String topicName,
-                                                                                     CustomerAvroModel message) {
+                                                                                     CustomerAvroModel message)
+    {
 
         return (result, ex) ->
         {
-            if (ex == null) {
+            if (ex == null)
+            {
                 RecordMetadata metadata = result.getRecordMetadata();
                 log.info("Received new metadata. Topic: {}; Partition {}; Offset {}; Timestamp {}, at time {}",
-                        metadata.topic(),
-                        metadata.partition(),
-                        metadata.offset(),
-                        metadata.timestamp(),
-                        System.nanoTime());
-            } else {
+                         metadata.topic(),
+                         metadata.partition(),
+                         metadata.offset(),
+                         metadata.timestamp(),
+                         System.nanoTime());
+            } else
+            {
                 log.error("Error while sending message {} to topic {}",
-                        message.toString(),
-                        topicName,
-                        ex);
+                          message.toString(),
+                          topicName,
+                          ex);
             }
         };
     }

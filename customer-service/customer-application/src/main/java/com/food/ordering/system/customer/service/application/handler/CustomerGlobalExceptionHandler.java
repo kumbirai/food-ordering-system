@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
 @ControllerAdvice
-public class CustomerGlobalExceptionHandler extends GlobalExceptionHandler {
+public class CustomerGlobalExceptionHandler extends GlobalExceptionHandler
+{
     @ResponseBody
     @ExceptionHandler(value = {CustomerDomainException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handleException(CustomerDomainException exception) {
+    public ErrorDTO handleException(CustomerDomainException exception)
+    {
         log.error(exception.getMessage(),
-                exception);
+                  exception);
         return ErrorDTO.builder()
-                .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(exception.getMessage())
-                .build();
+                       .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                       .message(exception.getMessage())
+                       .build();
     }
 }

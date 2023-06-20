@@ -3,7 +3,8 @@ package com.food.ordering.system.order.service.domain.valueobject;
 import java.util.Objects;
 import java.util.UUID;
 
-public class StreetAddress {
+public class StreetAddress
+{
     private final UUID id;
     private final String street;
     private final String postalCode;
@@ -12,31 +13,37 @@ public class StreetAddress {
     public StreetAddress(UUID id,
                          String street,
                          String postalCode,
-                         String city) {
+                         String city)
+    {
         this.id = id;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
     }
 
-    public UUID getId() {
+    public UUID getId()
+    {
         return id;
     }
 
-    public String getStreet() {
+    public String getStreet()
+    {
         return street;
     }
 
-    public String getPostalCode() {
+    public String getPostalCode()
+    {
         return postalCode;
     }
 
-    public String getCity() {
+    public String getCity()
+    {
         return city;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StreetAddress that = (StreetAddress) o;
@@ -44,9 +51,10 @@ public class StreetAddress {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(street,
-                postalCode,
-                city);
+                            postalCode,
+                            city);
     }
 }

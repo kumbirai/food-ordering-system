@@ -3,8 +3,13 @@ package com.food.ordering.system.order.service.dataaccess.customer.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
@@ -14,7 +19,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "customers")
 @Entity
-public class CustomerEntity {
+public class CustomerEntity implements Serializable
+{
     @Id
     private UUID id;
     private String username;
